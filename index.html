@@ -1,991 +1,1123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>VANTA — Technology, Curated.</title>
-  <meta name="description" content="VANTA — Discover thoughtfully selected technology for modern life.">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --black: #080808;
-      --dark: #111111;
-      --dark-soft: #181818;
-      --ivory: #f4f1ea;
-      --muted: #aaa7a0;
-      --line: rgba(244, 241, 234, 0.13);
-      --gold: #b9a47b;
-      --white: #ffffff;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--black);
-      color: var(--ivory);
-      font-family: "DM Sans", sans-serif;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    /* NAVBAR */
-
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 78px;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 6vw;
-      background: rgba(8, 8, 8, 0.94);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(14px);
-    }
-
-    .logo {
-      font-family: "Manrope", sans-serif;
-      font-size: 23px;
-      font-weight: 800;
-      letter-spacing: 0.25em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 38px;
-      align-items: center;
-      font-size: 13px;
-      color: #d2cfc8;
-    }
-
-    .nav-links a {
-      position: relative;
-      transition: color 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: white;
-    }
-
-    .nav-cta {
-      border: 1px solid #d8d3c9;
-      padding: 11px 19px;
-      transition: all 0.3s ease;
-    }
-
-    .nav-cta:hover {
-      background: var(--ivory);
-      color: var(--black);
-    }
-
-    /* HERO */
-
-    .hero {
-      min-height: 100vh;
-      padding: 170px 6vw 90px;
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      align-items: center;
-      gap: 70px;
-    }
-
-    .eyebrow {
-      color: var(--gold);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      margin-bottom: 25px;
-    }
-
-    .hero h1 {
-      font-family: "Manrope", sans-serif;
-      font-size: clamp(54px, 7vw, 108px);
-      line-height: 0.94;
-      letter-spacing: -0.065em;
-      font-weight: 700;
-      max-width: 760px;
-    }
-
-    .hero h1 span {
-      color: #8f8c85;
-    }
-
-    .hero-text {
-      max-width: 530px;
-      margin-top: 34px;
-      color: var(--muted);
-      font-size: 17px;
-      line-height: 1.8;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 14px;
-      margin-top: 42px;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 0 25px;
-      border: 1px solid var(--ivory);
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: all 0.3s ease;
-    }
-
-    .button.primary {
-      background: var(--ivory);
-      color: var(--black);
-    }
-
-    .button.primary:hover {
-      background: white;
-    }
-
-    .button.secondary {
-      border-color: #4c4a46;
-      color: #d8d5ce;
-    }
-
-    .button.secondary:hover {
-      border-color: var(--ivory);
-    }
-
-    /* HERO VISUAL */
-
-    .hero-visual {
-      min-height: 590px;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .visual-frame {
-      width: min(470px, 90%);
-      aspect-ratio: 0.83;
-      border: 1px solid var(--line);
-      background: #101010;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .visual-frame::before {
-      content: "";
-      position: absolute;
-      width: 70%;
-      height: 70%;
-      top: 15%;
-      left: 15%;
-      border: 1px solid rgba(185, 164, 123, 0.2);
-      border-radius: 50%;
-    }
-
-    .device {
-      position: absolute;
-      width: 220px;
-      height: 300px;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%) rotate(-7deg);
-      background: #202020;
-      border-radius: 45px;
-      border: 1px solid #414141;
-      box-shadow: 30px 40px 70px rgba(0, 0, 0, 0.65);
-    }
-
-    .device::before {
-      content: "";
-      position: absolute;
-      width: 78px;
-      height: 78px;
-      left: 50%;
-      top: 28%;
-      transform: translateX(-50%);
-      border-radius: 50%;
-      border: 2px solid #595959;
-    }
-
-    .device::after {
-      content: "V";
-      position: absolute;
-      left: 50%;
-      bottom: 26px;
-      transform: translateX(-50%);
-      font-family: "Manrope", sans-serif;
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: 0.1em;
-    }
-
-    .visual-label {
-      position: absolute;
-      bottom: 25px;
-      left: 25px;
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      color: #77736c;
-      text-transform: uppercase;
-    }
-
-    /* SECTION */
-
-    section {
-      padding: 120px 6vw;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      margin-bottom: 55px;
-      gap: 30px;
-    }
-
-    .section-number {
-      color: var(--gold);
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      margin-bottom: 15px;
-    }
-
-    .section-title {
-      font-family: "Manrope", sans-serif;
-      font-size: clamp(38px, 5vw, 68px);
-      line-height: 1;
-      letter-spacing: -0.05em;
-    }
-
-    .section-description {
-      max-width: 350px;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 14px;
-    }
-
-    /* CATEGORIES */
-
-    .categories {
-      background: var(--ivory);
-      color: var(--black);
-    }
-
-    .categories .section-number {
-      color: #887653;
-    }
-
-    .category-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      border-top: 1px solid #d4d0c8;
-      border-left: 1px solid #d4d0c8;
-    }
-
-    .category {
-      min-height: 390px;
-      position: relative;
-      padding: 35px;
-      border-right: 1px solid #d4d0c8;
-      border-bottom: 1px solid #d4d0c8;
-      overflow: hidden;
-      transition: background 0.4s ease;
-    }
-
-    .category:hover {
-      background: #ebe8e0;
-    }
-
-    .category-number {
-      font-size: 11px;
-      color: #8a867d;
-      letter-spacing: 0.15em;
-    }
-
-    .category h3 {
-      position: absolute;
-      bottom: 80px;
-      left: 35px;
-      font-family: "Manrope", sans-serif;
-      font-size: clamp(32px, 4vw, 55px);
-      letter-spacing: -0.055em;
-    }
-
-    .category p {
-      position: absolute;
-      bottom: 38px;
-      left: 35px;
-      color: #77736c;
-      font-size: 13px;
-    }
-
-    .category-icon {
-      position: absolute;
-      right: 50px;
-      top: 70px;
-      width: 150px;
-      height: 150px;
-      border: 1px solid #bdb8ae;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #77736c;
-      font-size: 55px;
-      transition: transform 0.5s ease;
-    }
-
-    .category:hover .category-icon {
-      transform: translateY(-12px) rotate(3deg);
-    }
-
-    /* FEATURED */
-
-    .featured {
-      background: var(--black);
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .product {
-      background: var(--dark);
-      border: 1px solid var(--line);
-      padding: 15px;
-      transition: transform 0.4s ease, border-color 0.4s ease;
-    }
-
-    .product:hover {
-      transform: translateY(-7px);
-      border-color: rgba(244, 241, 234, 0.3);
-    }
-
-    .product-image {
-      height: 330px;
-      background: #151515;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .product-image span {
-      font-family: "Manrope", sans-serif;
-      font-size: 70px;
-      color: #343434;
-    }
-
-    .product-info {
-      padding: 27px 12px 17px;
-    }
-
-    .product-category {
-      color: var(--gold);
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-
-    .product h3 {
-      font-family: "Manrope", sans-serif;
-      font-size: 22px;
-      margin-top: 10px;
-    }
-
-    .product p {
-      color: #88857e;
-      font-size: 13px;
-      margin-top: 9px;
-      line-height: 1.6;
-    }
-
-    .product-link {
-      display: inline-block;
-      margin-top: 20px;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border-bottom: 1px solid #77736c;
-      padding-bottom: 5px;
-    }
-
-    /* STATEMENT */
-
-    .statement {
-      background: #121212;
-      text-align: center;
-      padding: 160px 6vw;
-    }
-
-    .statement small {
-      color: var(--gold);
-      font-size: 10px;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-    }
-
-    .statement h2 {
-      font-family: "Manrope", sans-serif;
-      font-size: clamp(45px, 7vw, 100px);
-      line-height: 0.98;
-      letter-spacing: -0.06em;
-      max-width: 1000px;
-      margin: 35px auto 0;
-    }
-
-    .statement p {
-      max-width: 550px;
-      margin: 30px auto 0;
-      color: #89867f;
-      line-height: 1.8;
-    }
-
-    /* FOOTER */
-
-    footer {
-      padding: 70px 6vw 35px;
-      background: #070707;
-      border-top: 1px solid var(--line);
-    }
-
-    .footer-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 50px;
-      padding-bottom: 70px;
-    }
-
-    .footer-brand h2 {
-      font-family: "Manrope", sans-serif;
-      font-size: 45px;
-      letter-spacing: 0.08em;
-    }
-
-    .footer-brand p {
-      color: #77736c;
-      margin-top: 15px;
-      max-width: 300px;
-      line-height: 1.7;
-      font-size: 13px;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 70px;
-    }
-
-    .footer-column h4 {
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    .footer-column a {
-      display: block;
-      color: #85827b;
-      font-size: 13px;
-      margin-bottom: 12px;
-      transition: color 0.3s;
-    }
-
-    .footer-column a:hover {
-      color: white;
-    }
-
-    .footer-bottom {
-      border-top: 1px solid var(--line);
-      padding-top: 25px;
-      display: flex;
-      justify-content: space-between;
-      color: #5f5c56;
-      font-size: 11px;
-      gap: 20px;
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 900px) {
-
-      .navbar {
-        padding: 0 5vw;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-        padding-top: 140px;
-      }
-
-      .hero-visual {
-        min-height: 500px;
-      }
-
-      .product-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .footer-top {
-        flex-direction: column;
-      }
-    }
-
-    @media (max-width: 600px) {
-
-      .navbar {
-        height: 68px;
-      }
-
-      .logo {
-        font-size: 19px;
-      }
-
-      .hero {
-        padding: 120px 6vw 70px;
-      }
-
-      .hero h1 {
-        font-size: 53px;
-      }
-
-      .hero-text {
-        font-size: 15px;
-      }
-
-      .hero-buttons {
-        flex-direction: column;
-      }
-
-      .button {
-        width: 100%;
-      }
-
-      section {
-        padding: 85px 6vw;
-      }
-
-      .section-header {
-        display: block;
-      }
-
-      .section-description {
-        margin-top: 25px;
-      }
-
-      .category-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .category {
-        min-height: 330px;
-      }
-
-      .category-icon {
-        width: 110px;
-        height: 110px;
-        right: 30px;
-        top: 55px;
-        font-size: 42px;
-      }
-
-      .product-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .product-image {
-        height: 300px;
-      }
-
-      .statement {
-        padding: 110px 6vw;
-      }
-
-      .footer-links {
-        gap: 35px;
-        flex-wrap: wrap;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VANTA — Technology, Curated.</title>
+<meta name="description" content="VANTA — A refined destination for modern technology.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+  --black:#0b0b0a;
+  --black2:#121210;
+  --cream:#f3eee5;
+  --cream2:#e8e1d5;
+  --bronze:#a8916b;
+  --bronze-light:#c5b18c;
+  --text:#eee9df;
+  --muted:#9d998f;
+  --line:rgba(243,238,229,.14);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--black);
+  color:var(--text);
+  font-family:"Manrope",sans-serif;
+  overflow-x:hidden;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+/* NAV */
+
+.navbar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:82px;
+  padding:0 6vw;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  z-index:999;
+  background:rgba(11,11,10,.92);
+  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(18px);
+}
+
+.logo{
+  font-family:"Manrope",sans-serif;
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:.32em;
+}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:38px;
+  font-size:12px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.nav-links a{
+  color:#c7c2b8;
+  transition:.3s;
+}
+
+.nav-links a:hover{
+  color:white;
+}
+
+.nav-button{
+  padding:12px 20px;
+  border:1px solid var(--bronze);
+  color:var(--cream)!important;
+}
+
+/* HERO */
+
+.hero{
+  min-height:100vh;
+  padding:145px 6vw 90px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:70px;
+}
+
+.eyebrow{
+  color:var(--bronze-light);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  margin-bottom:28px;
+}
+
+.hero h1{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(70px,9vw,135px);
+  font-weight:500;
+  line-height:.82;
+  letter-spacing:-.055em;
+}
+
+.hero h1 em{
+  font-style:italic;
+  color:var(--bronze-light);
+}
+
+.hero-copy{
+  margin-top:38px;
+  max-width:500px;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.9;
+}
+
+.hero-actions{
+  margin-top:42px;
+  display:flex;
+  gap:14px;
+}
+
+.btn{
+  min-height:50px;
+  padding:0 27px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  transition:.35s;
+}
+
+.btn-main{
+  background:var(--cream);
+  color:#111;
+}
+
+.btn-main:hover{
+  background:white;
+  transform:translateY(-2px);
+}
+
+.btn-outline{
+  border:1px solid #555149;
+  color:var(--cream);
+}
+
+.btn-outline:hover{
+  border-color:var(--bronze);
+}
+
+/* HERO IMAGE */
+
+.hero-image{
+  height:650px;
+  position:relative;
+  overflow:hidden;
+  background:#151513;
+}
+
+.hero-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:grayscale(100%) contrast(1.05);
+  transition:transform 1s ease;
+}
+
+.hero-image:hover img{
+  transform:scale(1.035);
+}
+
+.hero-image::after{
+  content:"VANTA / 001";
+  position:absolute;
+  bottom:25px;
+  left:25px;
+  color:white;
+  font-size:9px;
+  letter-spacing:.25em;
+}
+
+/* INTRO */
+
+.intro{
+  background:var(--cream);
+  color:#141310;
+  padding:130px 6vw;
+}
+
+.intro-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:100px;
+  align-items:end;
+}
+
+.label{
+  color:#8e7958;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  margin-bottom:20px;
+}
+
+.intro h2{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(55px,7vw,100px);
+  font-weight:500;
+  line-height:.88;
+  letter-spacing:-.05em;
+}
+
+.intro p{
+  max-width:500px;
+  color:#69655e;
+  line-height:1.9;
+  font-size:14px;
+}
+
+/* COLLECTION */
+
+.collection{
+  background:var(--cream);
+  color:#12110f;
+  padding:0 6vw 130px;
+}
+
+.collection-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  padding-bottom:45px;
+}
+
+.collection-header h2{
+  font-family:"Cormorant Garamond",serif;
+  font-size:65px;
+  font-weight:500;
+  letter-spacing:-.045em;
+}
+
+.collection-header p{
+  max-width:330px;
+  color:#777269;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.collection-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+
+.category{
+  position:relative;
+  height:540px;
+  overflow:hidden;
+  background:#151513;
+  color:white;
+}
+
+.category img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .8s ease;
+  filter:brightness(.72) grayscale(35%);
+}
+
+.category:hover img{
+  transform:scale(1.055);
+}
+
+.category::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,.78),
+    rgba(0,0,0,.04) 65%
+  );
+}
+
+.category-content{
+  position:absolute;
+  left:35px;
+  right:35px;
+  bottom:32px;
+  z-index:2;
+}
+
+.category-number{
+  color:var(--bronze-light);
+  font-size:9px;
+  letter-spacing:.25em;
+  margin-bottom:12px;
+}
+
+.category h3{
+  font-family:"Cormorant Garamond",serif;
+  font-size:55px;
+  font-weight:500;
+  line-height:.9;
+}
+
+.category p{
+  color:#c6c1b8;
+  font-size:11px;
+  margin-top:14px;
+}
+
+/* FEATURED */
+
+.featured{
+  padding:135px 6vw;
+  background:var(--black);
+}
+
+.featured-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  margin-bottom:55px;
+}
+
+.featured-title small{
+  color:var(--bronze-light);
+  font-size:9px;
+  letter-spacing:.25em;
+}
+
+.featured-title h2{
+  margin-top:18px;
+  font-family:"Cormorant Garamond",serif;
+  font-size:75px;
+  font-weight:500;
+  line-height:.88;
+  letter-spacing:-.05em;
+}
+
+.featured-top p{
+  max-width:330px;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.8;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.product{
+  background:#121211;
+  border:1px solid var(--line);
+  transition:.4s;
+}
+
+.product:hover{
+  transform:translateY(-8px);
+  border-color:rgba(168,145,107,.55);
+}
+
+.product-image{
+  height:390px;
+  overflow:hidden;
+  background:#171715;
+}
+
+.product-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:.7s;
+}
+
+.product:hover .product-image img{
+  transform:scale(1.04);
+}
+
+.product-info{
+  padding:28px 25px 30px;
+}
+
+.product-category{
+  color:var(--bronze-light);
+  font-size:9px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+
+.product h3{
+  margin-top:10px;
+  font-family:"Cormorant Garamond",serif;
+  font-size:32px;
+  font-weight:500;
+}
+
+.product p{
+  margin-top:10px;
+  color:#88847b;
+  font-size:12px;
+  line-height:1.7;
+}
+
+.product-link{
+  display:inline-block;
+  margin-top:20px;
+  padding-bottom:5px;
+  border-bottom:1px solid #716b60;
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+/* STATEMENT */
+
+.statement{
+  background:var(--cream);
+  color:#11100e;
+  padding:160px 6vw;
+  text-align:center;
+}
+
+.statement small{
+  color:#907a59;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:.25em;
+}
+
+.statement h2{
+  max-width:1050px;
+  margin:30px auto 0;
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(65px,9vw,125px);
+  font-weight:500;
+  line-height:.82;
+  letter-spacing:-.06em;
+}
+
+.statement p{
+  max-width:500px;
+  margin:35px auto 0;
+  color:#706b62;
+  line-height:1.8;
+  font-size:13px;
+}
+
+/* FOOTER */
+
+footer{
+  background:#080807;
+  padding:75px 6vw 30px;
+}
+
+.footer-top{
+  display:flex;
+  justify-content:space-between;
+  gap:60px;
+  padding-bottom:70px;
+}
+
+.footer-logo{
+  font-size:25px;
+  font-weight:800;
+  letter-spacing:.3em;
+}
+
+.footer-description{
+  max-width:300px;
+  color:#747169;
+  font-size:12px;
+  line-height:1.8;
+  margin-top:17px;
+}
+
+.footer-columns{
+  display:flex;
+  gap:75px;
+}
+
+.footer-column h4{
+  color:var(--bronze-light);
+  font-size:9px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  margin-bottom:20px;
+}
+
+.footer-column a{
+  display:block;
+  color:#807c73;
+  font-size:12px;
+  margin-bottom:12px;
+}
+
+.footer-column a:hover{
+  color:white;
+}
+
+.footer-bottom{
+  border-top:1px solid var(--line);
+  padding-top:25px;
+  display:flex;
+  justify-content:space-between;
+  color:#555149;
+  font-size:10px;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+  .nav-links{
+    display:none;
+  }
+
+  .hero{
+    grid-template-columns:1fr;
+    padding-top:125px;
+  }
+
+  .hero-image{
+    height:520px;
+  }
+
+  .intro-grid{
+    grid-template-columns:1fr;
+    gap:45px;
+  }
+
+  .collection-grid{
+    grid-template-columns:1fr;
+  }
+
+  .products{
+    grid-template-columns:1fr;
+  }
+
+  .featured-top,
+  .collection-header{
+    display:block;
+  }
+
+  .featured-top p,
+  .collection-header p{
+    margin-top:25px;
+  }
+
+  .footer-top{
+    flex-direction:column;
+  }
+}
+
+@media(max-width:600px){
+
+  .navbar{
+    height:70px;
+  }
+
+  .logo{
+    font-size:19px;
+  }
+
+  .hero{
+    padding:110px 6vw 70px;
+  }
+
+  .hero h1{
+    font-size:68px;
+  }
+
+  .hero-image{
+    height:430px;
+  }
+
+  .hero-actions{
+    flex-direction:column;
+  }
+
+  .btn{
+    width:100%;
+  }
+
+  .intro,
+  .featured,
+  .statement{
+    padding:90px 6vw;
+  }
+
+  .collection{
+    padding:0 6vw 90px;
+  }
+
+  .collection-header h2,
+  .featured-title h2{
+    font-size:55px;
+  }
+
+  .category{
+    height:430px;
+  }
+
+  .category h3{
+    font-size:47px;
+  }
+
+  .product-image{
+    height:330px;
+  }
+
+  .footer-columns{
+    gap:40px;
+    flex-wrap:wrap;
+  }
+
+  .footer-bottom{
+    flex-direction:column;
+    gap:12px;
+  }
+}
+
+</style>
 </head>
 
 <body>
 
-  <!-- NAVBAR -->
+<!-- NAVBAR -->
 
-  <header class="navbar">
-    <a href="#" class="logo">VANTA</a>
+<header class="navbar">
 
-    <nav class="nav-links">
-      <a href="#collection">Collection</a>
-      <a href="#featured">Featured</a>
-      <a href="#about">About</a>
-      <a href="#featured" class="nav-cta">Explore</a>
-    </nav>
-  </header>
+  <a href="#" class="logo">VANTA</a>
+
+  <nav class="nav-links">
+    <a href="#collection">Collection</a>
+    <a href="#featured">Selection</a>
+    <a href="#about">About</a>
+    <a href="#collection" class="nav-button">Explore</a>
+  </nav>
+
+</header>
 
 
-  <!-- HERO -->
+<!-- HERO -->
 
-  <main>
+<section class="hero">
 
-    <section class="hero">
+  <div>
 
-      <div class="hero-content">
+    <div class="eyebrow">
+      Independent Technology Store
+    </div>
 
-        <div class="eyebrow">Independent Technology Store</div>
+    <h1>
+      Technology,<br>
+      <em>curated.</em>
+    </h1>
 
-        <h1>
-          Technology,<br>
-          <span>curated.</span>
-        </h1>
+    <p class="hero-copy">
+      A refined selection of modern technology,
+      chosen for people who appreciate performance,
+      design and simplicity.
+    </p>
 
-        <p class="hero-text">
-          Discover thoughtfully selected technology designed
-          for modern workspaces, entertainment and everyday life.
-        </p>
+    <div class="hero-actions">
 
-        <div class="hero-buttons">
-          <a href="#collection" class="button primary">
-            Explore Collection
-          </a>
+      <a href="#collection" class="btn btn-main">
+        Explore Collection
+      </a>
 
-          <a href="#featured" class="button secondary">
-            Featured Products
-          </a>
-        </div>
+      <a href="#featured" class="btn btn-outline">
+        View Selection
+      </a>
 
+    </div>
+
+  </div>
+
+
+  <div class="hero-image">
+
+    <img
+      src="https://images.unsplash.com/photo-1599669454699-248893623440?auto=format&fit=crop&w=1200&q=85"
+      alt="Premium black headphones"
+    >
+
+  </div>
+
+</section>
+
+
+<!-- INTRO -->
+
+<section class="intro" id="about">
+
+  <div class="intro-grid">
+
+    <div>
+
+      <div class="label">
+        The VANTA Philosophy
       </div>
-
-
-      <div class="hero-visual">
-
-        <div class="visual-frame">
-
-          <div class="device"></div>
-
-          <div class="visual-label">
-            VANTA / 001
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- CATEGORIES -->
-
-    <section class="categories" id="collection">
-
-      <div class="section-header">
-
-        <div>
-          <div class="section-number">01 / COLLECTION</div>
-
-          <h2 class="section-title">
-            Explore<br>the essentials.
-          </h2>
-        </div>
-
-        <p class="section-description">
-          Four carefully selected technology categories.
-          Simple choices. Modern design. Everyday performance.
-        </p>
-
-      </div>
-
-
-      <div class="category-grid">
-
-        <a href="#featured" class="category">
-
-          <div class="category-number">01</div>
-
-          <div class="category-icon">⌁</div>
-
-          <h3>Mouse</h3>
-
-          <p>Precision for every movement →</p>
-
-        </a>
-
-
-        <a href="#featured" class="category">
-
-          <div class="category-number">02</div>
-
-          <div class="category-icon">⌨</div>
-
-          <h3>Keyboard</h3>
-
-          <p>Designed for every keystroke →</p>
-
-        </a>
-
-
-        <a href="#featured" class="category">
-
-          <div class="category-number">03</div>
-
-          <div class="category-icon">◉</div>
-
-          <h3>Headphones</h3>
-
-          <p>Immersive sound, refined →</p>
-
-        </a>
-
-
-        <a href="#featured" class="category">
-
-          <div class="category-number">04</div>
-
-          <div class="category-icon">+</div>
-
-          <h3>Power Banks</h3>
-
-          <p>Power wherever you go →</p>
-
-        </a>
-
-      </div>
-
-    </section>
-
-
-    <!-- FEATURED -->
-
-    <section class="featured" id="featured">
-
-      <div class="section-header">
-
-        <div>
-
-          <div class="section-number">02 / SELECTION</div>
-
-          <h2 class="section-title">
-            The VANTA<br>selection.
-          </h2>
-
-        </div>
-
-        <p class="section-description">
-          A refined selection of products worth
-          discovering. Purchase through Amazon.
-        </p>
-
-      </div>
-
-
-      <div class="product-grid">
-
-        <article class="product">
-
-          <div class="product-image">
-            <span>01</span>
-          </div>
-
-          <div class="product-info">
-
-            <div class="product-category">
-              Mouse
-            </div>
-
-            <h3>Precision Mouse</h3>
-
-            <p>
-              Clean design and precise control
-              for your everyday workspace.
-            </p>
-
-            <a href="#" class="product-link">
-              View on Amazon →
-            </a>
-
-          </div>
-
-        </article>
-
-
-        <article class="product">
-
-          <div class="product-image">
-            <span>02</span>
-          </div>
-
-          <div class="product-info">
-
-            <div class="product-category">
-              Keyboard
-            </div>
-
-            <h3>Modern Keyboard</h3>
-
-            <p>
-              A refined keyboard experience
-              built for modern desks.
-            </p>
-
-            <a href="#" class="product-link">
-              View on Amazon →
-            </a>
-
-          </div>
-
-        </article>
-
-
-        <article class="product">
-
-          <div class="product-image">
-            <span>03</span>
-          </div>
-
-          <div class="product-info">
-
-            <div class="product-category">
-              Audio
-            </div>
-
-            <h3>Wireless Headphones</h3>
-
-            <p>
-              Designed for immersive listening
-              throughout your day.
-            </p>
-
-            <a href="#" class="product-link">
-              View on Amazon →
-            </a>
-
-          </div>
-
-        </article>
-
-      </div>
-
-    </section>
-
-
-    <!-- BRAND STATEMENT -->
-
-    <section class="statement" id="about">
-
-      <small>03 / THE VANTA STANDARD</small>
 
       <h2>
         Less noise.<br>
-        More technology.
+        Better choices.
       </h2>
 
-      <p>
-        VANTA exists to make discovering technology
-        feel simple, considered and premium.
-      </p>
+    </div>
 
-    </section>
+    <p>
+      Technology should feel effortless.
+      VANTA brings together carefully selected
+      devices and accessories in one refined
+      digital collection.
+    </p>
 
-  </main>
+  </div>
+
+</section>
 
 
-  <!-- FOOTER -->
+<!-- COLLECTION -->
 
-  <footer>
+<section class="collection" id="collection">
 
-    <div class="footer-top">
+  <div class="collection-header">
 
-      <div class="footer-brand">
+    <div>
 
-        <h2>VANTA</h2>
+      <div class="label">
+        01 / Collection
+      </div>
+
+      <h2>
+        The essentials.
+      </h2>
+
+    </div>
+
+    <p>
+      Four categories. One considered collection
+      of technology for modern everyday life.
+    </p>
+
+  </div>
+
+
+  <div class="collection-grid">
+
+
+    <!-- MOUSE -->
+
+    <a href="#featured" class="category">
+
+      <img
+        src="https://images.unsplash.com/photo-1554576575-a4e7b6e8409d?auto=format&fit=crop&w=1200&q=85"
+        alt="Black wireless mouse"
+      >
+
+      <div class="category-content">
+
+        <div class="category-number">
+          01 / PRECISION
+        </div>
+
+        <h3>Mouse</h3>
 
         <p>
-          Technology, curated.
-          A modern destination for thoughtfully
-          selected devices and accessories.
+          Precision for every movement →
         </p>
 
       </div>
 
+    </a>
 
-      <div class="footer-links">
 
-        <div class="footer-column">
+    <!-- KEYBOARD -->
 
-          <h4>Collection</h4>
+    <a href="#featured" class="category">
 
-          <a href="#collection">Mouse</a>
-          <a href="#collection">Keyboard</a>
-          <a href="#collection">Headphones</a>
-          <a href="#collection">Power Banks</a>
+      <img
+        src="https://images.unsplash.com/photo-1562819606-b7a0ebd7e7c5?auto=format&fit=crop&w=1200&q=85"
+        alt="Black mechanical keyboard"
+      >
 
+      <div class="category-content">
+
+        <div class="category-number">
+          02 / CONTROL
         </div>
 
+        <h3>Keyboard</h3>
 
-        <div class="footer-column">
+        <p>
+          Designed for every keystroke →
+        </p>
 
-          <h4>Explore</h4>
+      </div>
 
-          <a href="#featured">Featured</a>
-          <a href="#about">About VANTA</a>
+    </a>
 
+
+    <!-- HEADPHONES -->
+
+    <a href="#featured" class="category">
+
+      <img
+        src="https://images.unsplash.com/photo-1599669454699-248893623440?auto=format&fit=crop&w=1200&q=85"
+        alt="Premium black headphones"
+      >
+
+      <div class="category-content">
+
+        <div class="category-number">
+          03 / SOUND
         </div>
+
+        <h3>Headphones</h3>
+
+        <p>
+          Immersive sound, refined →
+        </p>
+
+      </div>
+
+    </a>
+
+
+    <!-- POWER BANK -->
+
+    <a href="#featured" class="category">
+
+      <img
+        src="https://images.unsplash.com/photo-1613329671121-5d1cf551cc3f?auto=format&fit=crop&w=1200&q=85"
+        alt="Power bank"
+      >
+
+      <div class="category-content">
+
+        <div class="category-number">
+          04 / POWER
+        </div>
+
+        <h3>Power Banks</h3>
+
+        <p>
+          Power wherever you go →
+        </p>
+
+      </div>
+
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- FEATURED -->
+
+<section class="featured" id="featured">
+
+  <div class="featured-top">
+
+    <div class="featured-title">
+
+      <small>
+        02 / VANTA SELECTION
+      </small>
+
+      <h2>
+        Selected<br>
+        essentials.
+      </h2>
+
+    </div>
+
+    <p>
+      Discover products selected for their
+      design, practicality and everyday appeal.
+    </p>
+
+  </div>
+
+
+  <div class="products">
+
+
+    <!-- PRODUCT 1 -->
+
+    <article class="product">
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1554576575-a4e7b6e8409d?auto=format&fit=crop&w=1000&q=85"
+          alt="Wireless mouse"
+        >
+
+      </div>
+
+      <div class="product-info">
+
+        <div class="product-category">
+          Mouse
+        </div>
+
+        <h3>
+          Precision Mouse
+        </h3>
+
+        <p>
+          Clean form, precise control and
+          a refined workspace aesthetic.
+        </p>
+
+        <a href="#" class="product-link">
+          View on Amazon →
+        </a>
+
+      </div>
+
+    </article>
+
+
+    <!-- PRODUCT 2 -->
+
+    <article class="product">
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1562819606-b7a0ebd7e7c5?auto=format&fit=crop&w=1000&q=85"
+          alt="Mechanical keyboard"
+        >
+
+      </div>
+
+      <div class="product-info">
+
+        <div class="product-category">
+          Keyboard
+        </div>
+
+        <h3>
+          Modern Keyboard
+        </h3>
+
+        <p>
+          A sophisticated typing experience
+          for modern desks and workspaces.
+        </p>
+
+        <a href="#" class="product-link">
+          View on Amazon →
+        </a>
+
+      </div>
+
+    </article>
+
+
+    <!-- PRODUCT 3 -->
+
+    <article class="product">
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1599669454699-248893623440?auto=format&fit=crop&w=1000&q=85"
+          alt="Wireless headphones"
+        >
+
+      </div>
+
+      <div class="product-info">
+
+        <div class="product-category">
+          Audio
+        </div>
+
+        <h3>
+          Wireless Headphones
+        </h3>
+
+        <p>
+          Immersive listening with a clean,
+          understated design.
+        </p>
+
+        <a href="#" class="product-link">
+          View on Amazon →
+        </a>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- STATEMENT -->
+
+<section class="statement">
+
+  <small>
+    03 / The VANTA Standard
+  </small>
+
+  <h2>
+    Designed to be<br>
+    discovered.
+  </h2>
+
+  <p>
+    Modern technology doesn't need to be complicated.
+    It simply needs to be well chosen.
+  </p>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <div class="footer-top">
+
+    <div>
+
+      <div class="footer-logo">
+        VANTA
+      </div>
+
+      <p class="footer-description">
+        Technology, curated.
+        A modern destination for thoughtfully
+        selected devices and accessories.
+      </p>
+
+    </div>
+
+
+    <div class="footer-columns">
+
+      <div class="footer-column">
+
+        <h4>Collection</h4>
+
+        <a href="#collection">Mouse</a>
+        <a href="#collection">Keyboard</a>
+        <a href="#collection">Headphones</a>
+        <a href="#collection">Power Banks</a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h4>Explore</h4>
+
+        <a href="#featured">Selection</a>
+        <a href="#about">About VANTA</a>
 
       </div>
 
     </div>
 
+  </div>
 
-    <div class="footer-bottom">
 
-      <span>© 2026 VANTA. All rights reserved.</span>
+  <div class="footer-bottom">
 
-      <span>Amazon links may be affiliate links.</span>
+    <span>
+      © 2026 VANTA. All rights reserved.
+    </span>
 
-    </div>
+    <span>
+      Amazon affiliate disclosure.
+    </span>
 
-  </footer>
+  </div>
+
+</footer>
 
 </body>
 </html>
